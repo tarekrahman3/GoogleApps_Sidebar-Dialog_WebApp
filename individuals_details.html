@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    #Header#
+  <br><br>
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name">
+  <br><br>
+  <button type="button" onclick="get_name();">Save Name</button>
+  <br><br>
+
+  <label for="mobile">Mobile:</label>
+  <input type="text" id="mobile" name="mobile">
+  <br><br>
+  <button type="button" onclick="get_mobile();">Save Mobile</button>
+  <br><br>
+    <label for="email">Email:</label>
+  <input type="text" id="email" name="email">
+  <br><br>
+  <button type="button" onclick="get_email();">Save Email</button>
+  
+  <script>
+      function get_name(){
+        var name = document.getElementById("name").value;
+        google.script.run.set_name(name);
+      }
+  
+        function get_mobile(){
+        var mobile = document.getElementById("mobile").value;
+        google.script.run.set_mobile(mobile);
+      }
+
+      function get_email(){
+        var email = document.getElementById("email").value;
+        google.script.run.set_email(email);
+      }
+  </script>
+  </body>
+</html>
