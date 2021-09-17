@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <base target="_top">
+  </head>
+  <body>
+Action Board
+<br><br>
+  <label for="call_date">Call Date (Format: dd/mm):</label>
+  <input type="text" id="call_date" name="call_date">
+  <br><br>
+  <button type="button" onclick="get_call_date()">Save Call Date</button>
+  <br><br>
+
+  <label for="follow_up_date">Follow Up Date (Format: dd/mm):</label>
+  <input type="text" id="follow_up_date" name="next_date"><br><br>
+  <button type="button" onclick="get_follow_up_date();">Save Follow Up Date</button>
+  
+  <br><br>
+
+  <label for=">Todays Note">Todays Note:</label>
+  <br><br>
+<select name="Todays Note" id= "TodaysNote">
+    <option value="Recieved Order" >Recieved Order</option>
+    <option value="Gave a follow up date">Gave a follow up date</option>
+    <option value="No Answer">No Answer</option>
+  </select>
+  <br><br>
+  <button type="button" onclick="get_note()">Save Todays Note</button>
+  
+  <script>
+      
+      function get_call_date(){
+        var call_date = document.getElementById("call_date").value;
+        //var r = RegExp('\d{2}/\d{2}|\d{2}/\d{1}').test(call_date)
+        //if(r==false){window.alert()
+        google.script.run.set_call_date(call_date);
+      }
+      function get_follow_up_date(){
+        var follow_up_date = document.getElementById("follow_up_date").value;
+        google.script.run.set_follow_up_date(follow_up_date);
+      }
+      function get_note(){
+        var select = document.getElementById('TodaysNote');
+        var value = select.options[select.selectedIndex].value;
+        google.script.run.set_note(Date().substring(0,10) + ': ' + value);
+      }
+  </script>
+
+
+</body>
+</html>
