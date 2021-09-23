@@ -1,17 +1,15 @@
-function onOpen() {
+async function onOpen() {
   if (SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange('A:R').getValues().length > 1){
-      todaysAppointments()
+      showTodaysAppointments()
       }
   SpreadsheetApp.getUi().createMenu('Schedules')
-    .addItem('Todays Appointments', 'todaysAppointments')
+    .addItem('Todays Appointments', 'showTodaysAppointments')
     .addItem('Tomorrows Appointments', 'tomorrowsAppointments')
     .addToUi();
 };
 
 function evaluate_date(date_string) {
-  var today = new Date();
-  var date = new Date(date_string);
-  if (today.getDate() + '/'+ today.getMonth() == date.getDate() +'/' + date.getMonth()){
+  if (String(date_string).substring(0,15) === new Date().toDateString()){
     return true;
   };
 };
@@ -20,8 +18,8 @@ function checkTodaysAppointments(){
   sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   date_column = sheet.getRange('A:R').getValues();
   obj = []
-  for (var i in date_column){
-    if (evaluate_date(date_column[i][15])==true){
+  for (var i=0;i<date_column.length; i++){
+    if (evaluate_date(date_column[i][15])===true){
       obj.push({
         'Serial':date_column[i][0],
         'Store_Name':date_column[i][2],
@@ -35,18 +33,19 @@ function checkTodaysAppointments(){
 };
 
 function html_source(obj){
-  if (obj.length>1){
+  if (obj.length!=0){
     s = "<style> table, th, td {border: 1px solid black;} </style>";
-    t = 
+    const headers = 
       "<tr>"+
         '<th>' + 'Serial'+ '</th>' + 
         '<th>' + 'Store Name'+ '</th>' + 
         '<th>' + 'State' + '</th>' + 
         '<th>' + 'Employee Name' + '</th>'+ 
-        '<th>' + 'Notes' + '</th>'+
+        '<th>' + 'Latest Note' + '</th>'+
       '</tr>';
-    for (var i = 0; i < obj.length; i++) {
-      t = t +
+    var content = ''
+    for (var i in obj) {
+      t =  content +
         '<tr>'+
           '<td>' + obj[i].Serial + '</td>' +
           '<td>' + obj[i].Store_Name + '</td>' +
@@ -55,14 +54,14 @@ function html_source(obj){
           '<td>' + obj[i].Note + '</td>' + 
         '</tr>';
     };
-    return s + "<table><tbody>"+ t + "</tbody></table>";
+    return s + "<table><tbody>"+ headers + t + "</tbody></table>";
   } 
   else {
     return '<h4>No appointments found for today</h4>';
-    }
+  };
 };
 
-function todaysAppointments(){
+function showTodaysAppointments(){
   var html = HtmlService.createHtmlOutput(html_source(checkTodaysAppointments()));
   html.setWidth(800);
   html.setHeight(400);
