@@ -1,7 +1,5 @@
 async function onOpen() {
-  if (SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange('A:R').getValues().length > 1){
-      showTodaysAppointments()
-      }
+  showTodaysAppointments();
   SpreadsheetApp.getUi().createMenu('Schedules')
     .addItem('Todays Appointments', 'showTodaysAppointments')
     .addItem('Tomorrows Appointments', 'tomorrowsAppointments')
