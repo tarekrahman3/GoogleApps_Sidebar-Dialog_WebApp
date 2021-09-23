@@ -8,6 +8,13 @@ async function onOpen() {
     .addToUi();
 };
 
+function showTodaysAppointments(){
+  var html = HtmlService.createHtmlOutput(html_source(checkTodaysAppointments()));
+  html.setWidth(800);
+  html.setHeight(400);
+  SpreadsheetApp.getUi().showModalDialog(html, 'Todays Follow up Calls ');
+};
+
 function evaluate_date(date_string) {
   if (String(date_string).substring(0,15) === new Date().toDateString()){
     return true;
@@ -59,11 +66,4 @@ function html_source(obj){
   else {
     return '<h4>No appointments found for today</h4>';
   };
-};
-
-function showTodaysAppointments(){
-  var html = HtmlService.createHtmlOutput(html_source(checkTodaysAppointments()));
-  html.setWidth(800);
-  html.setHeight(400);
-  SpreadsheetApp.getUi().showModalDialog(html, 'Todays Follow up Calls ');
 };
