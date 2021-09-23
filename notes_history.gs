@@ -21,4 +21,4 @@ function generate_value(e, history){
     SpreadsheetApp.getActive().toast(e.value+' | '+new_value + '|' + history_value)
     }
   return value;
-}
+};
