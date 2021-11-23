@@ -39,6 +39,19 @@ function checkTodaysAppointments(){
 
 function html_source(obj){
   console.log(obj)
+  let new_obj = []
+  for (var i=0;i<obj.length;i++)
+  {
+    let note = obj[i].Note.toLowerCase(); 
+    if (note.includes('call after') | note.includes('call before')| note.includes('call between'))
+    {
+      new_obj.unshift(obj[i])
+    } else {
+      new_obj.push(obj[i])
+    };
+  };
+  obj = new_obj;
+  console.log(new_obj)
   if (obj.length!=0){
     s = "<style> table, th, td {border: 1px solid black;} </style>";
     const headers = 
