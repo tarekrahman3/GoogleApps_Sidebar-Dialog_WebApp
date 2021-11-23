@@ -1,14 +1,3 @@
-/*
-function debugging(){
-  sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  date_column = sheet.getRange('A:R').getValues();
-  date_string=date_column[9][15]
-  console.log(String(date_string).substring(0,15) === new Date().toDateString())
-  console.log(date_string)
-  console.log(new Date().toDateString())
-};
-*/
-
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Schedules')
     .addItem('Todays Appointments', 'showTodaysAppointments')
@@ -77,3 +66,16 @@ function html_source(obj){
     return '<h4>No appointments found for today</h4>';
   };
 };
+
+
+
+/*
+function debugging(){
+  sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  date_column = sheet.getRange('A:R').getValues();
+  date_string=date_column[9][15]
+  console.log(String(date_string).substring(0,15) === new Date().toDateString())
+  console.log(date_string)
+  console.log(new Date().toDateString())
+}
+*/
