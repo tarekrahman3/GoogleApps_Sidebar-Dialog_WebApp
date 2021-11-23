@@ -43,7 +43,7 @@ function html_source(obj){
   for (var i=0;i<obj.length;i++)
   {
     let note = obj[i].Note.toLowerCase(); 
-    if (note.includes('call after') | note.includes('call before')| note.includes('call between'))
+    if (note.includes('call after') || note.includes('call before') || note.includes('call between'))
     {
       new_obj.unshift(obj[i])
     } else {
